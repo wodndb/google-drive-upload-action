@@ -1,12 +1,12 @@
 import fs from "fs";
-import actions from "@actions/core";
+import * as core from "@actions/core";
 import { google } from "googleapis";
 
-const credentials = actions.getInput("credentials", { required: true });
-const parentFolderId = actions.getInput("parent_folder_id", { required: true });
-const target = actions.getMultilineInput("target", { required: true });
-const owner = actions.getInput("owner", { required: false });
-const childFolder = actions.getInput("child_folder", { required: false });
+const credentials = core.getInput("credentials", { required: true });
+const parentFolderId = core.getInput("parent_folder_id", { required: true });
+const target = core.getMultilineInput("target", { required: true });
+const owner = core.getInput("owner", { required: false });
+const childFolder = core.getInput("child_folder", { required: false });
 
 const credentialsJSON = JSON.parse(
   Buffer.from(credentials, "base64").toString()
@@ -81,4 +81,4 @@ async function main() {
   }
 }
 
-main().catch((error) => actions.setFailed(error));
+main().catch((error) => core.setFailed(error));
